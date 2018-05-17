@@ -1,5 +1,5 @@
 group "cn.cityworks"
-def artifactId = "digital-summit"
+def artifactId = "traffic-demo"
 version "1.0.1"
 
 apply plugin: "java"
@@ -39,7 +39,7 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator' // spring boot actuator
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix' // hystrix component
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign' // feign
-
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') // eureka clien
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
