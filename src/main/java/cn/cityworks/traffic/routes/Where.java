@@ -1,5 +1,6 @@
 package cn.cityworks.traffic.routes;
 
+import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ public class Where implements Serializable {
     @RequestMapping(method = RequestMethod.GET)
     public Object index(@RequestParam(name = "carNo",
             required = false, defaultValue = "没有车辆") String carNo) {
-        Map res = new HashMap();
+        Map res = Maps.newHashMap();
         res.put("code", 200);
         res.put("data", carNo);
         res.put("msg", null);

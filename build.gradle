@@ -1,6 +1,15 @@
+group "cn.cityworks"
+def artifactId = "digital-summit"
+version "1.0.1"
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
 buildscript {
 	ext {
-		springBootVersion = '2.0.2.RELEASE'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -10,21 +19,33 @@ buildscript {
 	}
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group = "cn.cityworks"
-version = "0.0.1"
-sourceCompatibility = 10
-
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/milestone" }
+//    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
 }
 
+ext {
+	springCloudVersion = 'Finchley.M8'
+}
+
+jar {
+	baseName = "$artifactId"
+	version= "$project.version"
+}
 
 dependencies {
+	compile group: 'com.google.guava', name: 'guava', version: '24.0-jre' // google 工具包
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator' // spring boot actuator
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix' // hystrix component
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign' // feign
+
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
