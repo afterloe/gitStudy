@@ -23,12 +23,13 @@ import java.io.Serializable;
 @Import(FeignClientsConfiguration.class)
 public class BaiduConfig implements Serializable {
 
-    @Value("${extends.baidu.url:http://baidu.com}")
+    @Value("${integrate.url:http://baidu.com}")
     private String url;
 
     @Bean
     @Autowired
     public BaiduClient buildBaiduClient(Decoder decoder, Encoder encoder, Contract contract, BaiduClientFallback fallback) {
+        System.out.println(url);
         return HystrixFeign.builder()
                 .contract(contract)
                 .encoder(encoder)
