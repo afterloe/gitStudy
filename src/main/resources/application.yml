@@ -23,10 +23,11 @@ info:
 
 eureka:
   instance:
-    preferIpAddress: false
+    preferIpAddress: true
     instance-id: ${HOSTNAME:}:${spring.cloud.client.ipAddress:}:${server.port}
     nonSecurePort: ${server.port:8080}
     hostname: ${spring.application.name}
+    health-check-url-path: acutator/info
   client:
     healthcheck:
       enable: true
