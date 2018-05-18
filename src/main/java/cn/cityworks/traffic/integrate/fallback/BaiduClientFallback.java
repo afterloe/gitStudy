@@ -17,6 +17,7 @@ public class BaiduClientFallback implements FallbackFactory<BaiduClient> {
 
     @Override
     public BaiduClient create(Throwable cause) {
+        cause.printStackTrace();
         LOGGER.error(cause.getMessage());
         return fall();
     }
