@@ -17,14 +17,22 @@ public class BaiduClientFallback implements FallbackFactory<BaiduClient> {
 
     @Override
     public BaiduClient create(Throwable cause) {
-        LOGGER.error(cause.getLocalizedMessage());
+        LOGGER.error(cause.getMessage());
         return fall();
     }
 
     private BaiduClient fall() {
-        return fallback == null? fallback = () -> {
-            LOGGER.error("invoke getIndex() failed.");
-            return "no such network";
-        } : fallback;
+        return fallback == null? fallback = new BaiduClient() {
+            @Override
+            public String getIndex() {
+                return null;
+            }
+
+            @Override
+            public String MapServer(String f) {
+                LOGGER.error("invoke MapServer({}) fail", f);
+                return "{\"Msg\": \"arcgis is down.\"}";
+            }
+        }: fallback;
     }
 }

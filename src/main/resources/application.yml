@@ -1,0 +1,3 @@
+extends:
+  baidu:
+    url: https://sampleserver6.arcgisonline.com
